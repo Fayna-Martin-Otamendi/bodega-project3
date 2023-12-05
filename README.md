@@ -71,7 +71,7 @@ Tour
 | POST   | /tours         | SÍ    | owner    | Crear un tour                 | franja_horaria, max_personas, id_bodega | {tour}                        |
 | PUT    | /tours/:id     | SÍ    | owner    | Actualizar un tour            | franja_horaria, max_personas            | {mensaje: 'Tour actualizado'} |
 | DELETE | /tours/:id     | SÍ    | owner    | Eliminar un tour              | -                                       | {mensaje: 'Tour eliminado'}   |
-
+| GET    | /tours/:idowner | SÍ    | owner    | Listar todos mis tours      | -                                       | [{tour}]                      |
 
 
 
