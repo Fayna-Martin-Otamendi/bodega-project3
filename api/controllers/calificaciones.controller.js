@@ -9,6 +9,7 @@ async function createQualification(req, res) {
         return res.status(200).json({message: 'Qualification created', qualification})
     } catch (error) {
         res.status(500).send(error)
+        console.log("El error está en la función createQualification")
     }
 }
 
@@ -17,7 +18,7 @@ async function modifyQualification(req, res) {
         const [qualificationExist, qualification] = await Calificación.update(req.body,{
             returning: true,
             where: {
-                id: req.params.id_usuario
+                id_usuario: req.params.userId
             },
         })
         if (qualificationExist !== 0) {
@@ -27,6 +28,7 @@ async function modifyQualification(req, res) {
         }
     } catch (error) {
         return res.status(500).send(error)
+        console.log("El error está en la función modifyQualification")
     }
 }
 
@@ -34,7 +36,7 @@ async function deleteQualification(req, res){
     try{
         const qualification = await Calificación.destroy({
             where: {
-                id: req.params.contactId
+                id_usuario: req.params.userId
             },
         })
         if(qualification) {
@@ -44,6 +46,7 @@ async function deleteQualification(req, res){
         }
     } catch (error) {
         return res.status(500).send(error)
+        console.log("El error está en la función deleteQualification")
     }
 }
 

@@ -12,6 +12,7 @@ async function getAllWineries(req, res) {
         }
     } catch (error) {
         res.status(500).send(error)
+        console.log("El error está en la función getAllWineries")
     }
 }
 
@@ -26,6 +27,7 @@ async function getOneWinery(req, res) {
         }
     } catch (error) {
         res.status(500).send(error)
+        console.log("El error está en la función getOneWineries")
     }
 } 
 
@@ -39,6 +41,7 @@ async function createWinery(req, res) {
         return res.status(200).json({message: 'Winery created', winery: winery})
     } catch (error) {
         res.status(500).send(error)
+        console.log("El error está en la función createWinery")
     }
 }
 
@@ -56,7 +59,8 @@ async function modifyWinery(req, res) {
             return res.status(404).send('Winery not found')
         }
     } catch (error) {
-        return res.status(500).send('Winery not found')
+        return res.status(500).send(error)
+        console.log("El error está en la función modifyWinery")
     }
 }
 
@@ -74,6 +78,7 @@ async function deleteWinery(req, res) {
         }
     } catch (error) {
         return res.status(500).send(error)
+        console.log("El error está en la función deleteWinery")
     }
 }
 

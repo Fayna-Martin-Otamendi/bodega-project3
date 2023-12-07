@@ -12,6 +12,7 @@ async function getAllReservations(req, res){
         }
     } catch (error) {
         res.status(500).send(error.message)
+        console.log("El error está en la función getAllReservations")
     }
 }
 
@@ -24,6 +25,7 @@ async function createReservation(req,res){
         return res.status(200).json({message:'Reservation created', reservation})
     } catch (error){
         res.status(500).send(error)
+        console.log("El error está en la función createReservation")
     }
 }
 
@@ -32,7 +34,7 @@ async function modifyReservation(req, res){
         const [reservationExists, reservation] = await Reserva.update(req.body,{
             returning: true,
             where: {
-                id: req.params.id_usuario
+                id_usuario: req.params.userId
             },
         })
         if (reservationExists !== 0) {
@@ -42,6 +44,7 @@ async function modifyReservation(req, res){
         } 
     } catch (error) {
         return res.status(500).send(error)
+        console.log("El error está en la función modifyReservation")
     }
 }
 
@@ -49,7 +52,7 @@ async function deleteReservation(req, res) {
     try{
         const reservation = await Reserva.destroy({
             where: {
-                id: req.params.id_usuario
+                id_usuario: req.params.userId
             },
         })
         if (reservation) {
@@ -59,6 +62,7 @@ async function deleteReservation(req, res) {
         }
     } catch (error){
         return res.status(500).send(error)
+        console.log("El error está en la función deleteReservation")
     }
 }
 

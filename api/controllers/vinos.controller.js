@@ -12,6 +12,7 @@ async function getAllWines(req, res){
         } 
     } catch (error){
         res.status(500).send(error)
+        console.log("El error está en la función getAllWines")
     }
 }
 
@@ -22,6 +23,7 @@ async function addWine(req, res) {
         return res.status(200).json({message: 'Wine created', wine})
     } catch (error){
         res.status(500).send(error)
+        console.log("El error está en la función addWine")
     }
 }
 
@@ -39,7 +41,8 @@ async function modifyWine(req, res) {
             return res.status(404).send('Wine not found')
         }
     } catch (error) {
-        return res.status(500).send(console.error();)
+        return res.status(500).send(error)
+        console.log("El error está en la función modifyWine")
     }
 }
 
@@ -57,6 +60,7 @@ async function deleteWine(req,res) {
         }
     } catch (error) {
         return res.status(500).send(error)
+        console.log("El error está en la función deleteWines")
     }
 }
 
