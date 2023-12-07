@@ -34,7 +34,6 @@ const getAllUsers = async (req, res) => {
       return res.status(500).json(error)
     }
   }
-
   
   const createUser = async (req, res) => {
     try {
@@ -70,6 +69,27 @@ const getAllUsers = async (req, res) => {
       console.log('Error updating user')
       res.status(500).json()
     }
+  }
+
+  const getOwnProfile = async (req,res) => {
+    try {
+      const user = await User.findOne({
+        where: {
+          id: res.locals.user.id
+        },
+        attributes: ['id','user_name','email']
+      })
+      if (user) {
+        const message = 'Hi ${user.user_name}!, this is your profile'
+        return res.status(200).json({message, user})
+      } else {
+        return res.status(404).send('User not found')
+      }
+     } catch (error) {
+        console.log('Error getting own profile')
+        res.status(500).json()
+      }
+    
   }
 
   const updateOwnProfile = async (req, res) => {

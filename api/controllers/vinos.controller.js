@@ -1,0 +1,68 @@
+const Vino = require('../models/vinos.model')
+
+async function getAllWines(req, res){
+    try{
+        const wine = await Vino.findAll({
+            where: req.query
+        })
+        if (wine) {
+            return res.status(200).json(wine)
+        } else {
+            return res.status(404).send('No wine found')
+        } 
+    } catch (error){
+        res.status(500).send(error)
+    }
+}
+
+async function addWine(req, res) {
+    try {
+        const wine = await Vino.create({
+        })
+        return res.status(200).json({message: 'Wine created', wine})
+    } catch (error){
+        res.status(500).send(error)
+    }
+}
+
+async function modifyWine(req, res) {
+    try {
+        const [wineExist, wine] = await Vino.update(req.body,{
+            returning: true,
+            where: {
+                id: req.params.id_bodega
+            },
+        })
+        if (wineExist !== 0) {
+            return res.status(200).json({ message: 'Wine updated', wine})
+        } else {
+            return res.status(404).send('Wine not found')
+        }
+    } catch (error) {
+        return res.status(500).send(console.error();)
+    }
+}
+
+async function deleteWine(req,res) {
+    try{
+        const wine = await Vino.destroy({
+            where: {
+                id: req.params.id_bodega
+            },
+        })
+        if (wine) {
+            return res.status(200).json('Wine deleted')
+        } else {
+            return res.status(404).send('Wine not found')
+        }
+    } catch (error) {
+        return res.status(500).send(error)
+    }
+}
+
+module.exports = {
+    getAllWines,
+    addWine,
+    modifyWine,
+    deleteWine
+}
