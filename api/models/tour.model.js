@@ -15,8 +15,10 @@ const Tour = connection.define('tour', {
     },
     reservado_personas: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      require: true
+      allowNull: true,
+      //Modificado por Adrián: al crear un tour, no debería de tener ya personas apuntadas 
+      require: false
+      //Modificado por Adrián: al crear un tour, no tiene sentido exigir un campo que valdrá 0 de inicio
     }, 
     id_bodega: {
         type: DataTypes.INTEGER,
