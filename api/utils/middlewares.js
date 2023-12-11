@@ -34,7 +34,15 @@ const checkAdmin = (req, res, next) => {
     next()
 }
 
+const checkOwner = (req, res, next) => {
+    if (res.locals.user.role !== 'owner') {
+        return res.status(401).send('User not authorized')
+    }
+    next()
+}    
+
 module.exports = {
     checkAuth,
-    checkAdmin
+    checkAdmin,
+    checkOwner
 }

@@ -1,42 +1,40 @@
-const User = require('../api/models/user.model')
-const Bodegas = require('../api/models/bodegas.model')
-const Calificaciones = require('../api/models/calificaciones.model')
-const Vinos = require('../api/models/vinos.model')
-const Tours = require('../api/models/tours.model')
-const Reservas = require('../api/models/reservas.model')
-const Pedidos = require('../api/models/pedidos.model')
-const Detalles__pedidos = require('../api/models/detalles_pedidos.model')
-
+const Bodega = require('./bodegas.model')
+const Calificacion= require('./calificaciones.model')
+const Detalle_pedido = require('./detalles_pedido.model')
+const Pedido = require('./pedidos.model')
+const Reserva = require('./reservas.model')
+const Tour = require('./tour.model')
+const User= require('./user.model')
+const Vino = require('./vinos.model')
 
 function addRelations() {
   try {
-    Calificaciones.hasMany(User)
-    User.belongsTo(Calificaciones)
+    Vino.hasMany(Bodega)
+    Bodega.belongsTo(Vino)
 
-    Calificaciones.hasMany(Vinos)
-    Vinos.belongsTo(Calificaciones)
+    Tour.hasMany(Bodega)
+    Bodega.belongsTo(Tour)
 
-    Bodegas.hasMany(Vinos)
-    Vinos.belongsTo(Bodegas)
+    Reserva.hasMany(Usuario)
+    Usuario.belongsTo(Reserva)
 
-    Detalles__pedidos.hasMany(Vinos)
-    Vinos.belongsTo(Detalles__pedidos)
+    Reserva.hasMany(Tour)
+    Tour.belongsTo(Reserva)
 
-    Pedidos.hasMany(User)
-    User.belongsTo(Pedidos)
+    Pedido.hasMany(Usuario)
+    Usuario.belongsTo(Pedido)
 
-    Reservas.hasMany(User)
-    User.belongsTo(Reservas)
+    Detalle_pedido.hasMany(Pedido)
+    Pedido.belongsTo(Detalle_pedido)
 
-    Tours.hasMany(Reservas)
-    Reservas.belongsTo(Tours)
+    Detalle_pedido.hasMany(Vino)
+    Vino.belongsTo(Detalle_pedido)
 
-    Bodegas.hasMany(Tours)
-    Tours.belongsTo(Bodegas)
+    Calificacion.hasMany(Usuario)
+    Usuario.belongsTo(Calificacion)
 
-    Pedidos.hasMany(Detalles__pedidos)
-    Detalles__pedidos.belongsTo(Pedidos)
-
+    Calificacion.hasMany(Vino)
+    Vino.belongsTo(Calificacion)
 
     
     console.log('Relations added')
