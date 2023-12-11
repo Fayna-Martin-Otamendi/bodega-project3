@@ -33,43 +33,40 @@ async function modifyOrder(req,res) {
                 userId: res.locals.user.id_usuario
             },
         })
-        if (contact)
+        if (order) {
+            return res.status(200).json('Order modified')
+        } else {
+            return res.status(404).send('Order not found')
+        }
+    } catch (error) {
+        return res.status(500).send(error)
+        console.log("El error está en la función modifyOrder")
     }
 }
 
-const Pedido = connection.define('pedido', {
-    id_usuario: {
-      type: DataTypes.INTEGER,
-      unique: true,
-      allowNull: false,
-      require: true
-    },
-    fecha: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      require: true,
-    },
-    total: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      require: true
-    },   
-    estado: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        require: true
-      },
-    direccion_envio: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        require: true
-      }, 
-  },{
-    timestamps: false
-  })
+
+  async function deleteOrder(req, res) {
+    try{
+        const order = await Pedido.destroy({
+            where: {
+                id: req.params.id
+            },
+        })
+        if (order) {
+            return res.status(200).json('Order deleted')
+        } else {
+            return res.status(404).send('Order not found')
+        }
+    } catch (error) {
+        return res.status(500).send(error)
+        console.log("El error está en la función deleteOrder")
+    }
+}
+  
 module.exports = {
     getAllOrders,
     createOrder,
     modifyOrder,
+    deleteOrder
 
 }

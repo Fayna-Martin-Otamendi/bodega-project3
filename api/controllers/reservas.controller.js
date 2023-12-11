@@ -16,10 +16,26 @@ async function getAllReservations(req, res){
     }
 }
 
+async function getOneReservation(req, res) {
+    try{
+        const reservation = await Reserva.findByPk(req.params.id_reserva,{
+        })
+        if (reservation) {
+            return res.status(200).json(reservation)
+        } else {
+            return res.status(404).send('Winery not found')
+        }
+    } catch (error) {
+        res.status(500).send(error)
+        console.log("El error está en la función getOneWineries")
+    }
+} 
+
 async function createReservation(req,res){
     try{
         const reservation = await Reserva.create({
             id_usuario: req.body.id_usuario,
+            id_tour: req.body.id_tour,
             personas: req.body.personas
         })
         return res.status(200).json({message:'Reservation created', reservation})
@@ -68,6 +84,7 @@ async function deleteReservation(req, res) {
 
 module.exports = {
     getAllReservations,
+    getOneReservation,
     createReservation,
     modifyReservation,
     deleteReservation
