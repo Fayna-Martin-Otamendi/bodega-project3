@@ -16,7 +16,22 @@ async function getAllWines(req, res){
     }
 }
 
-async function addWine(req, res) {
+async function getOneWine(req, res) {
+    try{
+        const vino = await Vino.findByPk(req.params.id_vino,{
+        })
+        if (vino) {
+            return res.status(200).json(vino)
+        } else {
+            return res.status(404).send('Tour not found')
+        }
+    } catch (error) {
+        res.status(500).send(error)
+        console.log("El error está en la función getOneTour")
+    }
+}
+
+async function createWine(req, res) {
     try {
         const wine = await Vino.create({
         })
@@ -66,7 +81,8 @@ async function deleteWine(req,res) {
 
 module.exports = {
     getAllWines,
-    addWine,
+    getOneWine,
+    createWine,
     modifyWine,
     deleteWine
 }

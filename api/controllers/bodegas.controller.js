@@ -47,7 +47,7 @@ async function createWinery(req, res) {
 
 async function modifyWinery(req, res) {
     try{
-        const [wineryExists, winery] = await Bodega.update(req.body. {
+        const [wineryExists, winery] = await Bodega.update(req.body, {
             returning: true,
             where: {
                 id: req.params.id_owner
